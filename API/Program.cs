@@ -15,8 +15,8 @@ builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddCors();
+// builder.Services.AddEndpointsApiExplorer();
 
 
 //everything before this is considered services container
@@ -33,6 +33,8 @@ var app = builder.Build();
 // app.UseHttpsRedirection();// redirects our http to https req// removed bcz we are always using https
 
 // app.UseAuthorization();// for authentication // not used yet
+
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200") );
 
 app.MapControllers();// middleware to map our controller// tells our which api endpoint to go to
 
