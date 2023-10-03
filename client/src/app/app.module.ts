@@ -1,19 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NavComponent } from './nav/nav.component';
+import { FormsModule } from '@angular/forms';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [//add new components that you create here
-    AppComponent
+    AppComponent, NavComponent, HomeComponent, RegisterComponent
   ],
   imports: [//add new modules that you create here
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,//gives two way binding,e.g nav-component and html tempate therefpre form details entered will reflect at both places
+    BsDropdownModule.forRoot(),
 
   ],
   providers: [],
