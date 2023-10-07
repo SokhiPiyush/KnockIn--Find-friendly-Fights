@@ -38,9 +38,9 @@ export class NavComponent implements OnInit {
         // console.log(response);
         // this.loggedIn = true;//a
       },
-      error: error=> {
-        this.toastr.error(error.error)
-        console.log(error)}
+      // error: error=> {
+      //   this.toastr.error(error.error)
+      //   console.log(error)}//Being Held by our interceptor now
     })
   }
 

@@ -1,14 +1,8 @@
 //main entry point to our application
 //dotnet run executes the code inside here
 
-using System.Text;
-using API.Data;
 using API.Extensions;
-using API.interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);//creates our web application instance
 
@@ -41,7 +35,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 //everything before this is considered services container
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 // if (app.Environment.IsDevelopment())
 // {
 //     // app.UseSwagger();// we deleted swagger
@@ -52,6 +46,9 @@ var app = builder.Build();
 // app.UseHttpsRedirection();// redirects our http to https req// removed bcz we are always using https
 
 // app.UseAuthorization();// for authentication // not used yet
+
+// Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200") );//allow cross origin
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -17,10 +17,14 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 // import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
   declarations: [//add new components that you create here
-    AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, MemberDetailComponent, ListsComponent, MessagesComponent
+    AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, MemberDetailComponent, ListsComponent, MessagesComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent
   ],
   imports: [//add new modules that you create here
     BrowserAnimationsModule,
@@ -31,7 +35,9 @@ import { SharedModule } from './_modules/shared.module';
     SharedModule
 
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}//our interceptor
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
