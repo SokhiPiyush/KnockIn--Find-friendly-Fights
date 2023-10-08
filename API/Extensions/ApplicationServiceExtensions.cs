@@ -1,5 +1,6 @@
 using API.Data;
 using API.interfaces;
+using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,9 @@ namespace API.Extensions
             //Transient-> short lived and not standard for http
             //Scoped-> Https services//Scoped to https request
             //Singleton-> from application start till aplication closed down e.g caching service save cache for other responses
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
             return services;
 

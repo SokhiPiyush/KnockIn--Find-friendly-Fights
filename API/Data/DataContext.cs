@@ -10,7 +10,7 @@ namespace API.Data
 
         }//constructor
 
-        public DbSet<AppUser> Users {get; set;}//represents tables inside our databse//tables will have a name Users with cols defined in appUser file
+        public DbSet<AppUser> Users {get; set;}//represents tables inside our database//tables will have a name Users with cols defined in appUser file
 
     }
 }
