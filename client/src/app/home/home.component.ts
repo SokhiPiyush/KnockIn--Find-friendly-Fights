@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,24 +11,24 @@ export class HomeComponent implements OnInit {
   registerMode = false;
   users: any;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }//removed injected private http: HttpClient//e
 
   ngOnInit(): void {
-    this.getUsers();
+    // this.getUsers();//e
   }
 
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
 
-  getUsers() {
-    this.http.get('https://localhost:5001/api/users').subscribe({
-      next: (response) => this.users = response,
-      error: error => console.log(error),
-      complete: () => console.log("req has completed")
-    })
+  // getUsers() {
+  //   this.http.get('https://localhost:5001/api/users').subscribe({
+  //     next: (response) => this.users = response,
+  //     error: error => console.log(error),
+  //     complete: () => console.log("req has completed")
+  //   })
 
-  }
+  // }// we made member service and did this thing in memberlist component//e
 
   cancelRegisterMode(event:boolean){
     this.registerMode = event;
