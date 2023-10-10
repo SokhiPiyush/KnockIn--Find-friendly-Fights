@@ -1,0 +1,28 @@
+.img-thumbnail{
+    margin: 2rem;
+    width: 85%;
+    height: 85%;
+    border-radius: 20px;
+
+}
+
+
+.card-body{
+    padding: 0 2rem;
+    background-color: rgba(0, 0, 0, 0.514);
+
+
+}
+
+.card-footer{
+    padding: 1rem 1.5rem;
+    background-color: rgba(0, 0, 0, 0.514);
+    opacity: 1;
+    border-radius: 20px;
+
+}
+.card{
+    background-color: rgba(0, 0, 0, 0.514);
+    border-radius: 20px;
+
+}
