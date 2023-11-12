@@ -25,10 +25,30 @@ import { MemberCardComponent } from './members/member-card/member-card.component
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+// import { FileSelectDirective, FileUploadModule } from 'ng2-file-upload';
+// import { FileSelectDirective } from 'ng2-file-upload';
+// import { FileUploadModule } from 'ng2-file-upload';
+// import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
+
 
 @NgModule({
   declarations: [//add new components that you create here
-    AppComponent, NavComponent, HomeComponent, RegisterComponent, MemberListComponent, MemberDetailComponent, ListsComponent, MessagesComponent, TestErrorComponent, NotFoundComponent, ServerErrorComponent, MemberCardComponent, MemberEditComponent
+  AppComponent,
+  NavComponent,
+  HomeComponent,
+  RegisterComponent,
+  MemberListComponent,
+  ListsComponent,
+  MessagesComponent,
+  TestErrorComponent,
+  NotFoundComponent,
+  ServerErrorComponent,
+  MemberCardComponent,
+  MemberEditComponent,
+  PhotoEditorComponent,
+
   ],
   imports: [//add new modules that you create here
     BrowserAnimationsModule,
@@ -36,7 +56,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,//gives two way binding,e.g nav-component and html tempate therefpre form details entered will reflect at both places
-    SharedModule
+    SharedModule,
+
 
   ],
   providers: [
