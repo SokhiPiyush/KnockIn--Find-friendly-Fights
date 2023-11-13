@@ -17,6 +17,7 @@ namespace API.Helpers
             //createmap<from,to>//to configure an indivisual property we use Formember(destination member we are interesed in)
             CreateMap<Photo,PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>();
         }
     }
 }
