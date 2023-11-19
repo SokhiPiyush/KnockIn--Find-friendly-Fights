@@ -4,6 +4,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +41,7 @@ namespace API.Controllers
 
         //creating API endpoints
         [HttpGet] // GET   /api/users
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         { // IEnumeranle bcz we want a list users and AppUSers is the type of data in that list i.e our users, Getusers is thne name of the method
 
             // var users = await _context.Users.ToListAsync(); //Tolist gets the list of all users in the database//b
@@ -50,7 +51,19 @@ namespace API.Controllers
             // var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);//removed after optimizing the mapper code//d
             //Map into IEnumerable of memberDto and we are gonna use users
 
-            var users = await _userRepository.GetMembersAsync();
+            var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+            userParams.CurrentUsername = currentUser.UserName;
+
+            if(string.IsNullOrEmpty(userParams.Gender)){
+                userParams.Gender = currentUser.Gender == "male" ? "female" : "male";
+                if(currentUser.Gender=="others"){
+                    userParams.Gender="others";
+                }
+            }   
+
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(new PaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages));
 
             return Ok(users);
 
