@@ -28,6 +28,7 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DatePickerComponent } from './_forms/date-picker/date-picker.component';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 // import { FileSelectDirective, FileUploadModule } from 'ng2-file-upload';
 // import { FileSelectDirective } from 'ng2-file-upload';
 // import { FileUploadModule } from 'ng2-file-upload';
@@ -52,7 +53,6 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
   PhotoEditorComponent,
   TextInputComponent,
   DatePickerComponent,
-  
 
   ],
   imports: [//add new modules that you create here
@@ -63,6 +63,8 @@ import { DatePickerComponent } from './_forms/date-picker/date-picker.component'
     FormsModule,//gives two way binding,e.g nav-component and html tempate therefpre form details entered will reflect at both places
     ReactiveFormsModule,
     SharedModule,
+
+
 
 
   ],
