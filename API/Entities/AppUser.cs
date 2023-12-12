@@ -1,17 +1,18 @@
 
 using API.Extensions;
+using Microsoft.AspNetCore.Identity;
 
 namespace API.Entities
 {
-    public class AppUser
+    public class AppUser : IdentityUser<int> 
     {
-        public int Id {get; set; }//not optional
+        // public int Id {get; set; }//not optional//Identity handled
 
-        public string UserName { get; set; }//in c# strings have always been optional//Sicnce dotnet-6 they are not optional therefore "?" to make it optional//? will allow to keep it NULL as well (string?)
+        // public string UserName { get; set; }//in c# strings have always been optional//Sicnce dotnet-6 they are not optional therefore "?" to make it optional//? will allow to keep it NULL as well (string?)//Identity handled
 
-        public byte[] PasswordHash {get; set;}//byte type array
+        // public byte[] PasswordHash {get; set;}//byte type array//Identity handled
         
-        public byte[] PasswordSalt {get; set;}
+        // public byte[] PasswordSalt {get; set;}//ASP.Net Identity is now taking care of this
 
         public DateOnly DateOfBirth {get; set;}
         public string KnownAs {get; set;}
@@ -38,6 +39,8 @@ namespace API.Entities
         // {
         //     return DateOfBirth.CalculateAge();
         // }//to make auto mapper a bit more efficient
+
+        public ICollection<AppUserRole> UserRoles {get;set;}
 
     }
 

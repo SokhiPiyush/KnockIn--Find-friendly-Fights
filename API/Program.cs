@@ -2,8 +2,10 @@
 //dotnet run executes the code inside here
 
 using API.Data;
+using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);//creates our web application instance
@@ -64,8 +66,11 @@ using var scope = app.Services.CreateScope();//this gives access to all the serv
 var services = scope.ServiceProvider;
 try{
   var context = services.GetRequiredService<DataContext>();
+  var userManager = services.GetRequiredService<UserManager<AppUser>>();
+  var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
   await context.Database.MigrateAsync();//creates DB at start of the app if not there
-  await Seed.SeedUsers(context);
+  // await Seed.SeedUsers(context);
+  await Seed.SeedUsers(userManager, roleManager);
 
 }catch(Exception ex){
   var logger = services.GetService<ILogger<Program>>();

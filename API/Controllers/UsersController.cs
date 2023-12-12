@@ -40,6 +40,7 @@ namespace API.Controllers
         // [AllowAnonymous]
 
         //creating API endpoints
+        // [Authorize(Roles ="Admin")]//which roles should be allowed to access this endpoint
         [HttpGet] // GET   /api/users
         public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         { // IEnumeranle bcz we want a list users and AppUSers is the type of data in that list i.e our users, Getusers is thne name of the method
@@ -74,6 +75,7 @@ namespace API.Controllers
 
         //method to get an indivisual user
         // [HttpGet("{id}")]//c
+        // [Authorize(Roles ="Member")]
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
