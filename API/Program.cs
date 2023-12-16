@@ -5,6 +5,7 @@ using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Middleware;
+using API.SignalR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,13 +55,16 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200") );//allow cross origin
+app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200") );//allow cross origin
 
 //middleware for authentication and authorization
 app.UseAuthentication();//asks do you have a valid token
 app.UseAuthorization();//asks oky u have valid , what r u allowed to do?
 
 app.MapControllers();// middleware to map our controller// tells our which api endpoint to go to
+
+app.MapHub<PresenceHub>("hubs/presence");//SignalR hub
+app.MapHub<MessageHub>("hubs/message");
 
 using var scope = app.Services.CreateScope();//this gives access to all the services we have inside this program class
 var services = scope.ServiceProvider;
@@ -69,6 +73,7 @@ try{
   var userManager = services.GetRequiredService<UserManager<AppUser>>();
   var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
   await context.Database.MigrateAsync();//creates DB at start of the app if not there
+  await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");
   // await Seed.SeedUsers(context);
   await Seed.SeedUsers(userManager, roleManager);
 
