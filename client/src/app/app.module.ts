@@ -34,6 +34,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 // import { FileSelectDirective, FileUploadModule } from 'ng2-file-upload';
 // import { FileSelectDirective } from 'ng2-file-upload';
 // import { FileUploadModule } from 'ng2-file-upload';
@@ -63,6 +64,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
   UserManagementComponent,
   PhotoManagementComponent,
   RolesModalComponent,
+  ConfirmDialogComponent,
 
   ],
   imports: [//add new modules that you create here

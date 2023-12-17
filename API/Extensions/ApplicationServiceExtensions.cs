@@ -25,16 +25,21 @@ namespace API.Extensions
             //Transient-> short lived and not standard for http
             //Scoped-> Https services//Scoped to https request
             //Singleton-> from application start till aplication closed down e.g caching service save cache for other responses
-            services.AddScoped<IUserRepository, UserRepository>();
+
+            // services.AddScoped<IUserRepository, UserRepository>();//UnitOfWork
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
+            // services.AddScoped<ILikesRepository, LikesRepository>();
+            // services.AddScoped<IMessageRepository, MessageRepository>();injecting repos in conrollers here // now injecting UnitOfWork instead
+
             services.AddSignalR();
             services.AddSingleton<PresenceTracker>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             
             return services;
 
