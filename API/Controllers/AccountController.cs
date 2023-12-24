@@ -145,7 +145,8 @@ public class AccountController : BaseApiController
             Username = user.UserName,
             Token = await _tokenService.CreateToken(user),
             KnownAs = user.KnownAs,
-            Gender = user.Gender
+            Gender = user.Gender,
+            Weight = user.Weight
         };
     }
 

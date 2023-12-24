@@ -1,10 +1,10 @@
-<div class="container mt-5">
-    <div *ngIf="!registerMode" style="text-align: center;">
-    <h1>Find a worthy Opponent</h1>
-    <p class="lead">Come on in to view your Battles... All you need to do is Sign Up!</p>
+<div class="container mt-4">
+    <div *ngIf="!registerMode && !learnMode" style="text-align: center;">
+    <h1 class="heading">FIND A WORTHY OPPONENT</h1>
+    <p class="lead">Come on in to view your Battles <br>  All you need to do is Sign Up!</p>
     <div class="text-center">
         <button (click)="registerToggle()" class="btn btn-primary bt-lg me-2">Register</button>
-        <button class="btn btn-primary btn-info bt-lg ">Learn More</button>
+        <button (click)="learnToggle()" class="btn btn-primary btn-info bt-lg ">Learn More</button>
     </div>
 </div>
 
@@ -16,4 +16,22 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="learnMode" class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 justify-content-center text-center">
+            <div class="disclaimer row justify-content-center">
+                <h1>This Project is still in Development Phase</h1>
+                <hr>
+                <h4>If you wish to contribute in the development of this project, feel free to contact: <br><br> <a href = "mailto:p.s.piyushsokhi@gmail.com" >p.s.piyushsokhi&#64;gmail.com</a></h4>
+            </div>
+            <br>
+            <button class="btn btn-primary btn-info " (click)="learnToggle()" >Go back</button>
+            <!-- <app-register [usersFromHomeComponent]="users"  (cancelRegister)="cancelRegisterMode($event)"></app-register> --> 
+        </div>
+    </div>
 </div>
+<div class="initial">DEVELOPED BY PIYUSH SOKHI</div>
+
+
+

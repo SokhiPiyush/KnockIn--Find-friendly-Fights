@@ -43,10 +43,11 @@ export class RegisterComponent implements OnInit {
       gender: ['male'],//passing as an array now
       username: ["",Validators.required],
       knownAs: ["",Validators.required],
+      Weight: ["",Validators.required],
       dateOfBirth: ["",Validators.required],
       city: ["",Validators.required],
       country: ["",Validators.required],
-      password: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(12)]],
+      password: ['',[Validators.required,Validators.minLength(4),Validators.maxLength(8)]],
       confirmPassword: ['',[Validators.required,this.matchValues('password')]],
     });
     this.registerForm.controls['password'].valueChanges.subscribe({
@@ -66,7 +67,9 @@ export class RegisterComponent implements OnInit {
     // console.log(this.registerForm?.value);
     // // console.log(this.model);
     const dob = this.getDateOnly(this.registerForm.controls['dateOfBirth'].value);
-    const values = {...this.registerForm.value, dateOfBirth: dob}; 
+    const weight = this.registerForm.controls['Weight'].value.toString();
+    const values = {...this.registerForm.value, dateOfBirth: dob, Weight: weight}; 
+
 
     this.accountService.register(values).subscribe({
       next: () =>{
@@ -77,6 +80,7 @@ export class RegisterComponent implements OnInit {
       error: error=>{
         // this.toastr.error(error.error),
         // console.log(error)
+        console.error('Registration error:', error);
         this.validationErrors = error
       }
     })
@@ -91,6 +95,17 @@ export class RegisterComponent implements OnInit {
     if(!dob) return;
     let theDob = new Date(dob);
     return new Date(theDob.setMinutes(theDob.getMinutes()-theDob.getTimezoneOffset())).toISOString().slice(0,10);//slice timestamp and get only the date
+  }
+
+  getObjectValues(obj: any): string[] {
+    return Object.values(obj);
+  }
+
+  isPasswordValid(): boolean {
+    return (
+      this.registerForm.get('password')!.valid &&
+      this.registerForm.get('confirmPassword')!.valid
+    );
   }
 
 }

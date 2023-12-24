@@ -7,3 +7,9 @@ img {
    border: 2px solid white;
    display: inline;
 }
+.navbar-brand{
+   letter-spacing: 5px;
+   font-style: italic;
+   font-weight:bolder;
+
+}

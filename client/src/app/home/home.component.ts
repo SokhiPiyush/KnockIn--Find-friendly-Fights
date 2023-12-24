@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
 
   registerMode = false;
   users: any;
+  learnMode = false;
 
   constructor() { }//removed injected private http: HttpClient//e
 
@@ -20,6 +21,12 @@ export class HomeComponent implements OnInit {
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
+
+  learnToggle() {
+    this.learnMode = !this.learnMode;
+  }
+
+
 
   // getUsers() {
   //   this.http.get('https://localhost:5001/api/users').subscribe({
@@ -33,6 +40,10 @@ export class HomeComponent implements OnInit {
   cancelRegisterMode(event:boolean){
     this.registerMode = event;
 
+  }
+
+  cancelLearnMode(event:boolean){
+    this.learnMode = event;
   }
 
 }
