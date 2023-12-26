@@ -11,6 +11,13 @@ namespace API.Data
 {
     public class Seed
     {
+
+        public static async Task ClearConnections(DataContext context)
+        {
+          context.Connections.RemoveRange(context.Connections);
+          await context.SaveChangesAsync();
+        }
+
         // public static async Task SeedUsers(DataContext context){//replacing with UserManager
         public static async Task SeedUsers(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager){
             if(await userManager.Users.AnyAsync()) return; //stop this method if there are any users in the DB
@@ -40,6 +47,9 @@ namespace API.Data
               user.UserName = user.UserName.ToLower();
             //   user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
             //   user.PasswordSalt = hmac.Key;//Identity Handled
+
+              user.Created = DateTime.SpecifyKind(user.Created, DateTimeKind.Utc);
+              user.LastActive = DateTime.SpecifyKind(user.LastActive, DateTimeKind.Utc);
 
               // context.Users.Add(user);//replaced by userManager
               await userManager.CreateAsync(user, "Pa$$w0rd");//saves the changes automatically

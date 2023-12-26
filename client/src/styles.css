@@ -4,6 +4,7 @@ body{
 }
 .back{
   background-image: url("./assets/blacc.jpg");
+  background-size: cover;
 }
 
 .tab-panel {

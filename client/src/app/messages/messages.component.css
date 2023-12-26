@@ -1,3 +1,11 @@
 .img-circle {
    max-height: 60px;     
 }
+.msgbox{
+   width: 80vw;
+   position: relative;
+   right:0px;
+   padding: 20px;
+   border-radius: 50px;
+   /* margin: 20px; */
+}

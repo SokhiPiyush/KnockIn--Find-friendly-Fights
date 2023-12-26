@@ -14,10 +14,10 @@ namespace API.Extensions
         {
 
             //to use DataContext class features throughout
-            services.AddDbContext<DataContext>(opt =>
-            {
-                opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-            });
+            // services.AddDbContext<DataContext>(opt =>
+            // {
+            //     opt.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+            // });//moved to program class
             services.AddCors();
             // builder.Services.AddEndpointsApiExplorer();
             services.AddScoped<ITokenService, TokenService>();
