@@ -19,8 +19,8 @@
     <h3>No messages</h3>
 </div>
 
-<div class="row justify-content-center" style="width: 80vw;position: relative;right:0px;padding: 1rem;left: 0px; align-content: center; margin-left: 8rem; text-align: center;" *ngIf="messages && messages.length > 0">
-    <table class="table table-hover justify-content-center msgbox ms-2" style="cursor: pointer;">
+<div class="row d-flex justify-content-center" *ngIf="messages && messages.length > 0">
+    <table class="table table-hover text-center justify-content-center msgbox ms-2" style="cursor: pointer;">
         <thead>
             <tr>
                 <th style="width: 40%">Message</th>
