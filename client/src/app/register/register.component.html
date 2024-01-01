@@ -41,11 +41,22 @@
    <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])" [label]="'Confirm Password'" [type]="'password'"></app-text-input>
 
    <div class="row" *ngIf="validationErrors">
-      <ul class="text-danger">
+      <!-- <ul class="text-danger">
          <li *ngFor="let error of getObjectValues(validationErrors)">
          {{error}}
       </li>
-      </ul>
+      </ul> -->
+      <div *ngIf="!isPasswordValid()" class="text-danger information">
+         <p>
+           Password must be at least 6 characters.
+         </p>
+         <p >
+           Password must have at least one digit ('0'-'9').
+         </p>
+         <p>
+           Password must have at least one uppercase letter ('A'-'Z').
+         </p>
+       </div>
 
    </div>
       
@@ -87,20 +98,22 @@
       <button class="btn btn-default" type="button" (click)="cancel()">Cancel</button>
    </div>
 
+   <div *ngIf="!isPasswordValid()" class="text-danger">
+      <p *ngIf="registerForm.get('password')?.hasError('PasswordTooShort')">
+        Password must be at least 6 characters.
+      </p>
+      <p *ngIf="registerForm.get('password')?.hasError('PasswordRequiresDigit')">
+        Password must have at least one digit ('0'-'9').
+      </p>
+      <p *ngIf="registerForm.get('password')?.hasError('PasswordRequiresUpper')">
+        Password must have at least one uppercase letter ('A'-'Z').
+      </p>
+    </div>
+
 </form>
 
-<div *ngIf="!isPasswordValid()" class="text-danger">
-   <p *ngIf="registerForm.get('password')?.hasError('PasswordTooShort')">
-     Password must be at least 6 characters.
-   </p>
-   <p *ngIf="registerForm.get('password')?.hasError('PasswordRequiresDigit')">
-     Password must have at least one digit ('0'-'9').
-   </p>
-   <p *ngIf="registerForm.get('password')?.hasError('PasswordRequiresUpper')">
-     Password must have at least one uppercase letter ('A'-'Z').
-   </p>
- </div>
+
  
 
 <!-- <p>Form Value: {{registerForm.value | json}}</p>
-<p>Form status: {{registerForm.status | json}}</p> -->
+<p>Form status: {{registerForm.status | json}} Aa1abc</p> -->

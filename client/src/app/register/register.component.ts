@@ -81,7 +81,8 @@ export class RegisterComponent implements OnInit {
         // this.toastr.error(error.error),
         // console.log(error)
         console.error('Registration error:', error);
-        this.validationErrors = error
+        this.validationErrors = error;
+        this.isPasswordValid();
       }
     })
   }
@@ -102,9 +103,9 @@ export class RegisterComponent implements OnInit {
   }
 
   isPasswordValid(): boolean {
+    console.log("Incorrect Validation for password");
     return (
-      this.registerForm.get('password')!.valid &&
-      this.registerForm.get('confirmPassword')!.valid
+      false
     );
   }
 
