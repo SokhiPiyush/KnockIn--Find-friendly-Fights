@@ -99,21 +99,42 @@ app.MapHub<PresenceHub>("hubs/presence");//SignalR hub
 app.MapHub<MessageHub>("hubs/message");
 app.MapFallbackToController("Index", "Fallback");
 
-using var scope = app.Services.CreateScope();//this gives access to all the services we have inside this program class
-var services = scope.ServiceProvider;
-try{
-  var context = services?.GetRequiredService<DataContext>();
-  var userManager = services.GetRequiredService<UserManager<AppUser>>();
-  var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-  await context.Database.MigrateAsync();//creates DB at start of the app if not there
-  // await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");//wrote method in seed class fro postgres
-  // await Seed.SeedUsers(context);
-  await Seed.ClearConnections(context);
-  await Seed.SeedUsers(userManager, roleManager);
+// using var scope = app.Services.CreateScope();//this gives access to all the services we have inside this program class
+// var services = scope.ServiceProvider;
+// try{
+//   var context = services?.GetRequiredService<DataContext>();
+//   var userManager = services.GetRequiredService<UserManager<AppUser>>();
+//   var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+//   await context.Database.MigrateAsync();//creates DB at start of the app if not there
+//   // await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");//wrote method in seed class fro postgres
+//   // await Seed.SeedUsers(context);
+//   await Seed.ClearConnections(context);
+//   await Seed.SeedUsers(userManager, roleManager);
 
-}catch(Exception ex){
-  var logger = services.GetService<ILogger<Program>>();
-  logger.LogError(ex,"An error occured during Migration");
+// }catch(Exception ex){
+//   var logger = services.GetService<ILogger<Program>>();
+//   logger.LogError(ex,"An error occured during Migration");
+// }
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try {
+    var context = services?.GetRequiredService<DataContext>();
+    var userManager = services?.GetRequiredService<UserManager<AppUser>>(); // Add null check here
+    var roleManager = services?.GetRequiredService<RoleManager<AppRole>>(); // Add null check here
+
+    // Ensure all required services are not null before proceeding
+    if (context != null && userManager != null && roleManager != null) {
+        await context.Database.MigrateAsync();
+        await Seed.ClearConnections(context);
+        await Seed.SeedUsers(userManager, roleManager);
+    } else {
+        // Log a warning or handle the missing services appropriately
+    }
+} catch (Exception ex) {
+    var logger = services?.GetService<ILogger<Program>>(); // Add null check here
+    logger?.LogError(ex, "An error occurred during Migration");
 }
+
 
 app.Run();
