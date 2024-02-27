@@ -102,7 +102,7 @@ app.MapFallbackToController("Index", "Fallback");
 using var scope = app.Services.CreateScope();//this gives access to all the services we have inside this program class
 var services = scope.ServiceProvider;
 try{
-  var context = services.GetRequiredService<DataContext>();
+  var context = services?.GetRequiredService<DataContext>();
   var userManager = services.GetRequiredService<UserManager<AppUser>>();
   var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
   await context.Database.MigrateAsync();//creates DB at start of the app if not there

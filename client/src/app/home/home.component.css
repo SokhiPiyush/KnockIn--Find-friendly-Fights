@@ -1,4 +1,4 @@
-.disclaimer{
+ /* .disclaimer{
     width: 30 rem;
     text-align: center;
     justify-content: center;
@@ -30,11 +30,66 @@
     letter-spacing: 10px;
     z-index: 69;
     position:fixed;
-    /* transform: translate(450px , 450px); */
     bottom: 0;
     left: 38vw;
     width: 400px;
     text-align: center;
     opacity: 80%;
     color: aliceblue;
+} 
+ */
+
+ /* Original styles for all screen sizes */
+.disclaimer {
+    width: 30rem;
+    text-align: center;
+    justify-content: center;
+}
+
+.container {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../assets/ezgif.com-crop.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 50px;
+}
+
+.heading {
+    letter-spacing: 10px;
+    font-size: large;
+}
+
+.lead {
+    font-size: small;
+    letter-spacing: 5px;
+    margin-top: 2rem;
+    text-transform: uppercase;
+}
+
+.initial {
+    font-size: xx-small;
+    letter-spacing: 10px;
+    z-index: 69;
+    position: fixed;
+    bottom: 0;
+    left: 38vw;
+    width: 400px;
+    text-align: center;
+    opacity: 80%;
+    color: aliceblue;
+}
+
+/* Adjust styles for small screens */
+@media only screen and (max-width: 600px) {
+    .container {
+        background-position: -8rem 200px; /* Adjust background position for smaller screens */
+        background-size:auto; /* Change the background size to contain on smaller screens */
+    }
+
+    .initial {
+        font-size: x-small;
+        left: 2vw;
+        width: 96vw;
+    }
 }
